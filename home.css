@@ -53,6 +53,7 @@ body{
 }
 
 .promo{
+  height: 40px;
   background:linear-gradient(90deg,#0b4f2f,#0a7b55);
   border-radius:15px;
   padding:15px;
