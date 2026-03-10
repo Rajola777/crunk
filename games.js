@@ -105,3 +105,29 @@ chatNav.onclick = () => {
 accountNav.onclick = () => {
   window.location.href = "account.html";
 };
+// Set active nav automatically based on current page
+const navItems = document.querySelectorAll(".bottom-nav .nav-item");
+const currentPage = window.location.pathname.split("/").pop(); // get current file name
+
+navItems.forEach(item => {
+  item.classList.remove("active"); // remove active from all
+
+  const targetId = item.id;
+  // Map id to file
+  const pageMap = {
+    homeNav: "home.html",
+    gamesNav: "games.html",
+    tournamentsNav: "tournaments.html",
+    chatNav: "chat.html",
+    accountNav: "account.html"
+  };
+
+  if(pageMap[targetId] === currentPage){
+    item.classList.add("active"); // add active to current page nav
+  }
+
+  // Add click navigation
+  item.addEventListener("click", () => {
+    window.location.href = pageMap[targetId];
+  });
+});
