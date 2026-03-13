@@ -169,6 +169,36 @@ body{
 .nav-item i{
   font-size:22px;
 }
+.popup{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-content{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  width:320px;
+}
+
+.close{
+  cursor:pointer;
+  font-size:20px;
+  float:right;
+}
+
+.game-img{
+  cursor:pointer;
+  width:200px;
+}
 
 .nav-item.active{
   color:#3ea1ff;
