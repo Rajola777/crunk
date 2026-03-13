@@ -107,7 +107,8 @@ Players can explore freely and make choices that affect the story.
 The game combines RPG elements with action combat.`,
 img:"images/cyberpunk.jpg",
 download:"#",
-rating:4
+rating:4,
+price: 12
 },
 
 {
@@ -120,7 +121,8 @@ Choices in the story affect the outcome of many characters.
 It is considered one of the best RPG games ever made.`,
 img:"images/witcher3.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 9
 },
 
 {
@@ -133,7 +135,8 @@ Players can build their character in many different ways.
 It offers one of the largest and most mysterious worlds in RPG games.`,
 img:"images/eldenring.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 0
 },
 
 {
@@ -146,7 +149,8 @@ Combat mixes gadgets, acrobatics and powerful combos.
 It captures the feeling of truly being Spider-Man.`,
 img:"images/spiderman.jpg",
 download:"#",
-rating:5
+rating:4,
+price: 12
 },
 
 {
@@ -159,7 +163,8 @@ The game constantly changes with updates and collaborations.
 It remains one of the biggest online games worldwide.`,
 img:"images/fortnite.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 0
 },
 
 {
@@ -172,7 +177,8 @@ Players must survive longer than all other opponents.
 It is one of the most played mobile games globally.`,
 img:"images/pubgm.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 0
 },
 
 {
@@ -185,7 +191,8 @@ The game runs well even on low-end mobile phones.
 It has millions of players around the world.`,
 img:"images/freefire.jpg",
 download:"#",
-rating:4
+rating:4,
+price: 0
 },
 
 {
@@ -198,7 +205,8 @@ The graphics are extremely realistic and detailed.
 It is one of the best racing games ever created.`,
 img:"images/forza5.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 5
 },
 
 {
@@ -211,7 +219,8 @@ Cars can be customized with many performance upgrades.
 The game captures the excitement of street racing culture.`,
 img:"images/nfsheat.jpg",
 download:"#",
-rating:4
+rating:4,
+price: 4
 },
 
 {
@@ -224,7 +233,8 @@ Multiplayer allows building with friends online.
 It is one of the best selling games in history.`,
 img:"images/minecraft.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 4
 },
 
 {
@@ -237,7 +247,8 @@ The atmosphere is dark and terrifying.
 It continues the famous Resident Evil storyline.`,
 img:"images/revillage.jpg",
 download:"#",
-rating:4
+rating:4,
+price: 12
 },
 
 {
@@ -250,7 +261,8 @@ Players can revive teammates and complete contracts.
 It remains one of the top online shooters.`,
 img:"images/warzone.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 0
 },
 
 {
@@ -263,7 +275,8 @@ Training and upgrades help improve team performance.
 It is a favorite football game among mobile players.`,
 img:"images/dls2026.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 0
 }
     ,
 {
@@ -276,7 +289,8 @@ Online modes allow players to compete against friends.
 It is one of the most popular sports games globally.`,
 img:"images/fifa23.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 2
 },
 
 {
@@ -289,7 +303,8 @@ Career mode allows managing players and building teams.
 It offers a highly realistic football experience.`,
 img:"images/fc24.jpg",
 download:"#",
-rating:5
+rating:5,
+price: 9
 },
 
 {
@@ -302,7 +317,8 @@ Choices in the story influence alliances and conflicts.
 It combines history with action adventure gameplay.`,
 img:"images/acvalhalla.jpg",
 download:"#",
-rating:4
+rating:4,
+price: 3
 },
 
 {
