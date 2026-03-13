@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
-  const notificationBtn = document.getElementById("notificationBtn");
-  if(notificationBtn) notificationBtn.addEventListener("click", () => alert("No new notifications 🔔"));
 
   const dotsBtn = document.getElementById("dotsBtn");
   if(dotsBtn) dotsBtn.addEventListener("click", () => alert("More options menu ⚙️"));
@@ -559,4 +557,85 @@ themeBtn.addEventListener("click", () => {
     localStorage.setItem("theme", "light");
     themeLabel.innerText = "Light";
   }
+});
+const notificationBtn = document.getElementById("notificationBtn");
+const notificationPanel = document.getElementById("notificationPanel");
+const closeNotifications = document.getElementById("closeNotifications");
+
+notificationBtn.addEventListener("click", () => {
+  notificationPanel.classList.add("open");
+});
+
+closeNotifications.addEventListener("click", () => {
+  notificationPanel.classList.remove("open");
+});
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const db = getFirestore();
+
+const notificationList = document.getElementById("notificationList");
+
+const q = query(collection(db, "notifications"), orderBy("time","desc"));
+
+onSnapshot(q, (snapshot) => {
+
+  notificationList.innerHTML = "";
+
+  snapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    const item = document.createElement("div");
+    item.className = "notification-item";
+
+    item.innerHTML = `
+      <strong>${data.title}</strong>
+      <p>${data.message}</p>
+    `;
+
+    notificationList.appendChild(item);
+
+  });
+
+});
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const notificationList = document.getElementById("notificationList");
+
+const q = query(
+  collection(db, "notifications"),
+  orderBy("time", "desc")
+);
+
+onSnapshot(q, (snapshot) => {
+
+  notificationList.innerHTML = "";
+
+  snapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    const item = document.createElement("div");
+    item.className = "notification-item";
+
+    item.innerHTML = `
+      <strong>${data.title}</strong>
+      <p>${data.message}</p>
+    `;
+
+    notificationList.appendChild(item);
+
+  });
+
 });
