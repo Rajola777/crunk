@@ -41,20 +41,43 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("More options menu ⚙️");
     });
   }
+const slides = document.getElementById("slides");
+const slideImages = slides.children;
+const totalSlides = slideImages.length;
 
-  // ===== IMAGE SLIDER =====
-  let currentIndex = 0;
-  const slides = document.getElementById("slides");
+// Clone first and last slide for smooth infinite effect
+const firstClone = slideImages[0].cloneNode(true);
+const lastClone = slideImages[totalSlides - 1].cloneNode(true);
 
-  if(slides){
-    setInterval(() => {
-      const total = slides.children.length;
-      currentIndex = (currentIndex + 1) % total;
-      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }, 6000);
+slides.appendChild(firstClone);
+slides.insertBefore(lastClone, slideImages[0]);
+
+let index = 1; // start from actual first slide
+slides.style.transform = `translateX(-${index * 100}%)`;
+
+function nextSlide() {
+  index++;
+  slides.style.transition = "transform 0.7s ease-in-out";
+  slides.style.transform = `translateX(-${index * 100}%)`;
+}
+
+// Auto slide
+let sliderInterval = setInterval(nextSlide, 3000);
+
+// Loop effect
+slides.addEventListener("transitionend", () => {
+  if(index === totalSlides + 1){ // reached clone of first slide
+    slides.style.transition = "none";
+    index = 1;
+    slides.style.transform = `translateX(-${index * 100}%)`;
   }
-
+  if(index === 0){ // reached clone of last slide
+    slides.style.transition = "none";
+    index = totalSlides;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }
 });
+
 const games = [
   {
     title:"Where Winds Meet",
