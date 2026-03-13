@@ -55,19 +55,50 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
-const games = document.querySelectorAll(".game-img");
+const games = [
+  {
+    title: "Spider-Man",
+    desc: "Swing across the city and defeat villains.",
+    img: "images/spiderman.jpg",
+    download: "downloads/spiderman.apk"
+  },
+  {
+    title: "GTA",
+    desc: "Open world action adventure game.",
+    img: "images/gta.jpg",
+    download: "downloads/gta.apk"
+  },
+  {
+    title: "Racing Game",
+    desc: "High speed racing game with many cars.",
+    img: "images/racing.jpg",
+    download: "downloads/racing.apk"
+  }
+  // Unaweza kuongeza hadi 100+ games hapa
+];
+
+const container = document.getElementById("gamesContainer");
 
 games.forEach(game => {
-  game.addEventListener("click", () => {
+  const img = document.createElement("img");
+  img.src = game.img;
+  img.className = "game-img";
 
-    document.getElementById("popupImg").src = game.dataset.img;
-    document.getElementById("popupTitle").innerText = game.dataset.title;
-    document.getElementById("popupDesc").innerText = game.dataset.desc;
-    document.getElementById("popupDownload").href = game.dataset.download;
+  img.dataset.title = game.title;
+  img.dataset.desc = game.desc;
+  img.dataset.img = game.img;
+  img.dataset.download = game.download;
+
+  img.addEventListener("click", () => {
+    document.getElementById("popupImg").src = game.img;
+    document.getElementById("popupTitle").innerText = game.title;
+    document.getElementById("popupDesc").innerText = game.desc;
+    document.getElementById("popupDownload").href = game.download;
 
     document.getElementById("gamePopup").style.display = "flex";
-
   });
+
+  container.appendChild(img);
 });
 
 function closeGame(){
