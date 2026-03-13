@@ -74,72 +74,55 @@ document.addEventListener("DOMContentLoaded", () => {
     { title:"Red Dead Redemption", desc:"High speed racing game with many cars.", img:"images/reddeadredemption.jpg", download:"downloads/racing.apk", rating:4 }
   ];
 
-  const container = document.getElementById("gamesContainer");
+const container = document.getElementById("gamesContainer");
 
-  games.forEach(game => {
-    const card = document.createElement("div");
-    card.className = "game-card";
+  function renderGames(list){
+    container.innerHTML = "";
 
-    card.innerHTML = `
-      <img src="${game.img}">
-      <div class="game-info">
-        <h3>${game.title}</h3>
-        <p>${game.desc}</p>
-        <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
-      </div>
-    `;
+    list.forEach(game => {
+      const card = document.createElement("div");
+      card.className = "game-card";
 
-    card.addEventListener("click", () => {
-      document.getElementById("popupImg").src = game.img;
-      document.getElementById("popupTitle").innerText = game.title;
-      document.getElementById("popupDesc").innerText = game.desc;
-      document.getElementById("popupDownload").href = game.download;
-      document.getElementById("gamePopup").style.display = "flex";
+      card.innerHTML = `
+        <img src="${game.img}">
+        <div class="game-info">
+          <h3>${game.title}</h3>
+          <p>${game.desc}</p>
+          <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => {
+        document.getElementById("popupImg").src = game.img;
+        document.getElementById("popupTitle").innerText = game.title;
+        document.getElementById("popupDesc").innerText = game.desc;
+        document.getElementById("popupDownload").href = game.download;
+        document.getElementById("gamePopup").style.display = "flex";
+      });
+
+      container.appendChild(card);
     });
+  }
 
-    container.appendChild(card);
+  // show all games first
+  renderGames(games);
+
+  // ===== SEARCH =====
+  const searchInput = document.getElementById("searchInput");
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+
+    const filteredGames = games.filter(game =>
+      game.title.toLowerCase().includes(query) ||
+      game.desc.toLowerCase().includes(query)
+    );
+
+    renderGames(filteredGames);
   });
 
   window.closeGame = function(){
     document.getElementById("gamePopup").style.display = "none";
   }
-});
-// ===== SEARCH FUNCTIONALITY =====
-const searchInput = document.getElementById("searchInput");
 
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-
-  // Clear all current game cards
-  container.innerHTML = "";
-
-  // Filter games by title or description
-  const filteredGames = games.filter(game =>
-    game.title.toLowerCase().includes(query) ||
-    game.desc.toLowerCase().includes(query)
-  );
-
-  // Render filtered games
-  filteredGames.forEach(game => {
-    const card = document.createElement("div");
-    card.className = "game-card";
-    card.innerHTML = `
-      <img src="${game.img}">
-      <div class="game-info">
-        <h3>${game.title}</h3>
-        <p>${game.desc}</p>
-        <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
-      </div>
-    `;
-
-    card.addEventListener("click", () => {
-      document.getElementById("popupImg").src = game.img;
-      document.getElementById("popupTitle").innerText = game.title;
-      document.getElementById("popupDesc").innerText = game.desc;
-      document.getElementById("popupDownload").href = game.download;
-      document.getElementById("gamePopup").style.display = "flex";
-    });
-
-    container.appendChild(card);
-  });
 });
