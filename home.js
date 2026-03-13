@@ -57,48 +57,52 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 const games = [
   {
-    title: "Spider-Man",
-    desc: "Swing across the city and defeat villains.",
-    img: "images/spiderman.jpg",
-    download: "downloads/spiderman.apk"
+    title:"Spider-Man",
+    desc:"Swing across the city and defeat villains.",
+    img:"images/spiderman.jpg",
+    download:"downloads/spiderman.apk",
+    rating:4.5
   },
   {
-    title: "GTA",
-    desc: "Open world action adventure game.",
-    img: "images/gta.jpg",
-    download: "downloads/gta.apk"
+    title:"GTA",
+    desc:"Open world action adventure game.",
+    img:"images/gta.jpg",
+    download:"downloads/gta.apk",
+    rating:5
   },
   {
-    title: "Racing Game",
-    desc: "High speed racing game with many cars.",
-    img: "images/racing.jpg",
-    download: "downloads/racing.apk"
+    title:"Racing Game",
+    desc:"High speed racing game with many cars.",
+    img:"images/racing.jpg",
+    download:"downloads/racing.apk",
+    rating:4
   }
-  // Unaweza kuongeza hadi 100+ games hapa
 ];
 
 const container = document.getElementById("gamesContainer");
 
 games.forEach(game => {
-  const img = document.createElement("img");
-  img.src = game.img;
-  img.className = "game-img";
+  const card = document.createElement("div");
+  card.className = "game-card";
 
-  img.dataset.title = game.title;
-  img.dataset.desc = game.desc;
-  img.dataset.img = game.img;
-  img.dataset.download = game.download;
+  card.innerHTML = `
+    <img src="${game.img}">
+    <div class="game-info">
+      <h3>${game.title}</h3>
+      <p>${game.desc}</p>
+      <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
+    </div>
+  `;
 
-  img.addEventListener("click", () => {
+  card.addEventListener("click", () => {
     document.getElementById("popupImg").src = game.img;
     document.getElementById("popupTitle").innerText = game.title;
     document.getElementById("popupDesc").innerText = game.desc;
     document.getElementById("popupDownload").href = game.download;
-
     document.getElementById("gamePopup").style.display = "flex";
   });
 
-  container.appendChild(img);
+  container.appendChild(card);
 });
 
 function closeGame(){
