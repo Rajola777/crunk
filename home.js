@@ -525,7 +525,7 @@ const menuPages = {
   menuSettings: "settings.html",
   menuPrivacy: "privacy.html",
   menuShare: "share.html",
-  menuTheme: "😎",
+  menuTheme: "index.html",
   menuHelp: "help.html",
   menuRate: "rate.html",
   menuAbout: "about.html",
