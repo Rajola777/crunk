@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== GAMES POPUP =====
   const games = [
-    { title:"Where Winds Meet", desc:"Let the wind carry your legend to the boundless adventure....Where Winds Meet is an epic adventure through breathtaking valleys and towering mountains.Dynamic winds and changing weather challenge your navigation and strategy.Meet fascinating characters and make choices that shape your destiny.Solve puzzles, master survival skills, and explore a world full of secrets", img:"images/wherewindsmeet.jpg", download:"downloads/spiderman.apk", rating:4.5, price: 5$},
-    { title:"Black Myth:Wukong", desc:"Open world action adventure game.", img:"images/blackmythwukong.jpg", download:"downloads/gta.apk", rating:5, price: 0$ },
-    { title:"Red Dead Redemption", desc:"High speed racing game with many cars.", img:"images/reddeadredemption.jpg", download:"downloads/racing.apk", rating:4, price: 0$},
-    { title:"Spiderman3", desc:"web will grow time will tell people will be saved buy spider", img:"images/spiderman3.jpg", download:"downloads/spiderman3.apk", rating:3, 10$},
+    { title:"Where Winds Meet", desc:"Let the wind carry your legend to the boundless adventure....Where Winds Meet is an epic adventure through breathtaking valleys and towering mountains.Dynamic winds and changing weather challenge your navigation and strategy.Meet fascinating characters and make choices that shape your destiny.Solve puzzles, master survival skills, and explore a world full of secrets", img:"images/wherewindsmeet.jpg", download:"downloads/spiderman.apk", rating:4.5, price: 5},
+    { title:"Black Myth:Wukong", desc:"Open world action adventure game.", img:"images/blackmythwukong.jpg", download:"downloads/gta.apk", rating:5, price: 0 },
+    { title:"Red Dead Redemption", desc:"High speed racing game with many cars.", img:"images/reddeadredemption.jpg", download:"downloads/racing.apk", rating:4, price: 0},
+    { title:"Spiderman3", desc:"web will grow time will tell people will be saved buy spider", img:"images/spiderman3.jpg", download:"downloads/spiderman3.apk", rating:3, 10},
 
 {
 title:"Grand Theft Auto V",
@@ -80,7 +80,7 @@ It is one of the most successful games ever released.`,
 img:"images/gta5.jpg",
 download:"#",
 rating:5,
-price: 7$  
+price: 7  
 },
 
 {
@@ -94,7 +94,7 @@ It is widely praised for its storytelling and graphics.`,
 img:"images/rdr2.jpg",
 download:"#",
 rating:5,
-price: 15$  
+price: 15  
 },
 
 {
