@@ -104,3 +104,40 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("gamePopup").style.display = "none";
   }
 });
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+
+  // Remove all current cards
+  container.innerHTML = "";
+
+  // Filter games based on title or description
+  const filteredGames = games.filter(game => 
+    game.title.toLowerCase().includes(query) ||
+    game.desc.toLowerCase().includes(query)
+  );
+
+  // Render filtered games
+  filteredGames.forEach(game => {
+    const card = document.createElement("div");
+    card.className = "game-card";
+    card.innerHTML = `
+      <img src="${game.img}">
+      <div class="game-info">
+        <h3>${game.title}</h3>
+        <p>${game.desc}</p>
+        <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
+      </div>
+    `;
+    card.addEventListener("click", () => {
+      document.getElementById("popupImg").src = game.img;
+      document.getElementById("popupTitle").innerText = game.title;
+      document.getElementById("popupDesc").innerText = game.desc;
+      document.getElementById("popupDownload").href = game.download;
+      document.getElementById("gamePopup").style.display = "flex";
+    });
+
+    container.appendChild(card);
+  });
+});
