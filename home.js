@@ -540,3 +540,24 @@ Object.keys(menuPages).forEach(id => {
     });
   }
 });
+// Dark/Light theme toggle
+const themeBtn = document.getElementById("menuTheme");
+const themeLabel = document.getElementById("themeLabel");
+
+// Check saved theme on load
+let currentTheme = localStorage.getItem("theme") || "dark";
+document.body.classList.toggle("light-theme", currentTheme === "light");
+themeLabel.innerText = currentTheme === "light" ? "Light" : "Dark";
+
+// Toggle on click
+themeBtn.addEventListener("click", () => {
+  if (document.body.classList.contains("light-theme")) {
+    document.body.classList.remove("light-theme");
+    localStorage.setItem("theme", "dark");
+    themeLabel.innerText = "Dark";
+  } else {
+    document.body.classList.add("light-theme");
+    localStorage.setItem("theme", "light");
+    themeLabel.innerText = "Light";
+  }
+});
