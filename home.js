@@ -477,6 +477,7 @@ const container = document.getElementById("gamesContainer");
           <h3>${game.title}</h3>
           <p>${game.desc}</p>
           <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
+          <div class="game-price">${game.price === 0 ? "Free" : "$" + game.price}</div>
         </div>
       `;
 
