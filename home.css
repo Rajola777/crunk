@@ -233,12 +233,11 @@ body {
 
 /* Game grid */
 .games{
-  display:flex;
-  flex-direction:column; /* vertical stacking */
-  gap:20px;
-  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:15px;
+  padding:15px;
 }
-
 /* Game card style */
 .game-card{
   position: relative;
@@ -251,18 +250,18 @@ body {
   transition:0.3s;
   display: flex;
   flex-direction: column;
-  height: 340px;
+  height: auto;
 }
 
 .game-card:hover{
-  transform:scale(1.02);
-  box-shadow:0 10px 40px rgba(0,0,0,0.8);
+  transform:scale(1.03);
+  box-shadow:0 10px 40px rgba(62,161,255,0.5);
 }
 
 /* Image inside card */
 .game-card img{
   width:100%;
-  height:240px;
+  height:200px;
   display:block;
   border-bottom:2px solid #3ea1ff;
   object-fit:cover;
@@ -280,35 +279,12 @@ body {
 .game-info h3{
   margin:5px 0;
   color:#3ea1ff;
-  font-size:16px;
-}
-
-.game-info p{
-  margin:5px 0;
-  color:rgba(255,255,255,0.9);
   font-size:14px;
 }
-
-/* Stars / rating */
 .game-rating{
-  margin-top:8px;
   color:#ffb400;
-}
-#gamesContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  padding: 10px;
-}
-.game-info p{
-  margin:5px 0;
-  color:rgba(255,255,255,0.9);
-  font-size:14px;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-size:12px;
+  margin-top:5px;
 }
 .game-price{
   position:absolute;
@@ -318,6 +294,10 @@ body {
   padding:3px 8px;
   border-radius:8px;
   font-size:12px;
+}
+.game-date{
+  font-size:10px;
+  color:#aaa;
 }
 /* Popup overlay */
 .popup{
@@ -341,8 +321,8 @@ body {
   border-radius:20px;
   padding:30px;
   text-align:center;
-  max-width:400px;
-  width:90%;
+  max-width:700px;
+  width:95%;
   color:white;
   box-shadow:0 10px 40px rgba(0,0,0,0.7);
   animation: floatUp 0.6s ease-out;
@@ -375,6 +355,7 @@ body {
   border-radius:15px;
   margin-bottom:15px;
   box-shadow:0 5px 20px rgba(0,0,0,0.7);
+  width: 100%;
 }
 
 /* Title & description */
@@ -405,6 +386,26 @@ body {
 .popup-content button:hover{
   transform:scale(1.05);
   box-shadow:0 5px 20px rgba(0,255,178,0.5);
+}
+#popupTrailer video{
+  width:100%;
+  border-radius:12px;
+  margin-top:10px;
+}
+#popupScreens{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:10px;
+  margin-top:15px;
+}
+
+#popupScreens img{
+  width:100%;
+  border-radius:10px;
+  transition:0.3s;
+}
+#popupScreens img:hover{
+  transform:scale(1.05);
 }
 .menu i {
   font-size: 28px;  
@@ -512,4 +513,26 @@ body.light-theme .popup-content {
 
 .notification-item:hover{
   background:#222;
+}
+.dots{
+  position:absolute;
+  bottom:10px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
+
+.dot{
+  height:8px;
+  width:8px;
+  margin:4px;
+  background:rgba(255,255,255,0.4);
+  border-radius:50%;
+  display:inline-block;
+  cursor:pointer;
+}
+
+.dot.active{
+  background:#3ea1ff;
 }
