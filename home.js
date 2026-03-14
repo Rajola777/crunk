@@ -478,59 +478,63 @@ rating:4
 }
     ];
 
-const container = document.getElementById("gamesContainer");
+// Hii should replace the second renderGames inside DOMContentLoaded
+const searchInput = document.getElementById("searchInput");
 
-  function renderGames(list){
-    container.innerHTML = "";
-
-    list.forEach(game => {
-      const card = document.createElement("div");
-      card.className = "game-card";
-
-      card.innerHTML = `
-        <img src="${game.img}">
-        <div class="game-info">
-          <h3>${game.title}</h3>
-          <p>${game.desc.substring(0,60)}...</p>
-          <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
-          <div class="game-price">${game.price === 0 ? "Free" : "$" + game.price}</div>
-        </div>
-      `;
-
-      card.addEventListener("click", () => {
-        document.getElementById("popupImg").src = game.img;
-        document.getElementById("popupTitle").innerText = game.title;
-        document.getElementById("popupDesc").innerText = game.desc;
-        document.getElementById("popupDownload").href = game.download;
-        document.getElementById("gamePopup").style.display = "flex";
-      });
-
-      container.appendChild(card);
+function renderGames(list){
+  const container = document.getElementById("gamesContainer");
+  container.innerHTML = "";
+  list.forEach(game => {
+    const card = document.createElement("div");
+    card.className = "game-card";
+    card.innerHTML = `
+      <img src="${game.img}" alt="${game.title}">
+      <div class="game-info">
+        <h3>${game.title}</h3>
+        <p>${game.desc.substring(0,60)}...</p>
+        <div class="game-rating">${"★".repeat(Math.floor(game.rating))}</div>
+        <div class="game-price">${game.price === 0 ? "Free" : "$" + game.price}</div>
+      </div>
+    `;
+    card.addEventListener("click", () => {
+      document.getElementById("popupImg").src = game.img;
+      document.getElementById("popupTitle").innerText = game.title;
+      document.getElementById("popupDesc").innerText = game.desc;
+      const popupDownload = document.getElementById("popupDownload");
+      if(game.price === 0){
+        popupDownload.href = game.download;
+        popupDownload.innerText = "Download";
+      } else {
+        popupDownload.href = "#";
+        popupDownload.innerText = "Buy Game";
+        popupDownload.onclick = () => alert("Payments coming soon 💳");
+      }
+      document.getElementById("gamePopup").style.display = "flex";
     });
-  }
+    container.appendChild(card);
+  });
+}
 
-  // show all games first
-  renderGames(games);
-
-  // ===== SEARCH =====
-  const searchInput = document.getElementById("searchInput");
-
+// Show all games initially
+renderGames(games);
+  // Live predictive search
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
-
     const filteredGames = games.filter(game =>
       game.title.toLowerCase().includes(query) ||
       game.desc.toLowerCase().includes(query)
     );
-
     renderGames(filteredGames);
   });
 
-  window.closeGame = function(){
-    document.getElementById("gamePopup").style.display = "none";
-  }
-
+  // Optional: Enter key can blur input but results already live
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      searchInput.blur(); // removes focus, same as "Done"
+    }
+  });
 });
+
 // Sidebar toggle
 const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("menuBtn");
@@ -579,13 +583,3 @@ themeBtn.addEventListener("click", () => {
     themeLabel.innerText = "Light";
   }
 });
-const popupDownload = document.getElementById("popupDownload");
-
-if(game.price === 0){
-  popupDownload.href = game.download;
-  popupDownload.innerText = "Download";
-} else {
-  popupDownload.href = "#";
-  popupDownload.innerText = "Buy Game";
-  popupDownload.onclick = () => alert("Payments coming soon 💳");
-}
