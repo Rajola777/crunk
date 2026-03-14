@@ -579,3 +579,13 @@ themeBtn.addEventListener("click", () => {
     themeLabel.innerText = "Light";
   }
 });
+const popupDownload = document.getElementById("popupDownload");
+
+if(game.price === 0){
+  popupDownload.href = game.download;
+  popupDownload.innerText = "Download";
+} else {
+  popupDownload.href = "#";
+  popupDownload.innerText = "Buy Game";
+  popupDownload.onclick = () => alert("Payments coming soon 💳");
+}
