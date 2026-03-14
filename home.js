@@ -197,3 +197,59 @@ function closeGame() {
 // ===============================
 // INITIALIZATION DONE
 // ===============================
+// ===============================
+// TRENDING SLIDER
+// ===============================
+const trendingSlidesContainer = document.querySelector(".trending-slides");
+const trendingDotsContainer = document.querySelector(".trending-dots");
+let trendingGames = [];
+let trendingIndex = 0;
+
+async function fetchTrending() {
+  try {
+    const res = await fetch(`${BASE_URL}/games/lists/main?key=${API_KEY}&ordering=-added&page_size=5`);
+    const data = await res.json();
+    trendingGames = data.results || [];
+    renderTrending(trendingGames);
+    autoSlideTrending();
+  } catch (err) {
+    console.error("Trending fetch error:", err);
+  }
+}
+
+function renderTrending(games) {
+  trendingSlidesContainer.innerHTML = "";
+  trendingDotsContainer.innerHTML = "";
+
+  games.forEach((game, i) => {
+    const img = document.createElement("img");
+    img.src = game.background_image || "placeholder.png";
+    img.onclick = () => openGame(game.id);
+    trendingSlidesContainer.appendChild(img);
+
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.onclick = () => goTrending(i);
+    trendingDotsContainer.appendChild(dot);
+  });
+
+  goTrending(0);
+}
+
+function goTrending(i) {
+  trendingIndex = i;
+  trendingSlidesContainer.style.transform = `translateX(-${i * 100}%)`;
+  document.querySelectorAll(".trending-dots .dot").forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === trendingIndex);
+  });
+}
+
+function autoSlideTrending() {
+  setInterval(() => {
+    trendingIndex = (trendingIndex + 1) % trendingGames.length;
+    goTrending(trendingIndex);
+  }, 5000);
+}
+
+// Initialize trending
+fetchTrending();
