@@ -501,3 +501,15 @@ themeBtn.addEventListener("click", () => {
     themeLabel.innerText = "Light";
   }
 });
+// Close popup when clicking outside the content
+const gamePopup = document.getElementById("gamePopup");
+gamePopup.addEventListener("click", (e) => {
+  if (e.target === gamePopup) { // click outside popup-content
+    gamePopup.style.display = "none";
+  }
+});
+
+// Close game popup function
+function closeGame() {
+  gamePopup.style.display = "none";
+}
