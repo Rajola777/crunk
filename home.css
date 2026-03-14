@@ -17,21 +17,37 @@ body {
   margin-bottom:15px;
 }
 
-.search{
-  background:#0b1433;
-  padding:10px 15px;
-  border-radius:15px;
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
+/* Search container */
+.search {
+  background: #0b1433;
+  padding: 12px 20px;
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(62, 161, 255, 0.6); /* subtle neon glow */
+  transition: 0.3s;
 }
 
-.search input{
-  width:100%;
-  background:transparent;
-  border:none;
-  outline:none;
-  color:white;
+.search:hover {
+  box-shadow: 0 0 25px rgba(62, 161, 255, 0.8); /* glow on hover */
+}
+
+/* Input field */
+.search input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  caret-color: #00ffb2; /* neon caret */
+}
+
+/* Placeholder text */
+.search input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
 }
 
 .promo{
