@@ -1,0 +1,26 @@
+const axios = require("axios");
+const cheerio = require("cheerio");
+
+async function getGames() {
+  const url = "https://apkpure.com/game";  // Hii ni source ya data
+  const { data } = await axios.get(url);
+  const $ = cheerio.load(data);
+
+  let games = [];
+
+  $(".category-template-list li").each((i, el) => {
+    const title = $(el).find(".title").text();
+    const image = $(el).find("img").attr("src");
+    const link = "https://apkpure.com" + $(el).find("a").attr("href");
+
+    games.push({
+      title,
+      image,
+      link
+    });
+  });
+
+  console.log(JSON.stringify(games, null, 2));
+}
+
+getGames();
