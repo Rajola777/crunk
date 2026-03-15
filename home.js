@@ -45,7 +45,6 @@ document.getElementById("menuHelp").onclick = () => location.href = "help.html";
 document.getElementById("menuRate").onclick = () => location.href = "rate.html";
 document.getElementById("menuAbout").onclick = () => location.href = "about.html";
 document.getElementById("menuLogout").onclick = () => location.href = "logout.html";
-};
 
 // ===============================
 // NAVIGATION
