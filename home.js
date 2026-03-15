@@ -1,4 +1,3 @@
-// CONFIG
 const API_KEY="b6eb9c2e474d41e3bcc8550e873623de";
 const BASE_URL="https://api.rawg.io/api";
 
@@ -7,6 +6,7 @@ const gamesContainer=document.getElementById("gamesContainer");
 const searchInput=document.getElementById("searchInput");
 const slidesContainer=document.querySelector(".slides");
 const dotsContainer=document.querySelector(".dots");
+const loader=document.getElementById("loader");
 
 // POPUP
 const gamePopup=document.getElementById("gamePopup");
@@ -14,15 +14,14 @@ const popupContent=document.querySelector(".popup-content");
 const popupTitle=document.getElementById("popupTitle");
 const popupDesc=document.getElementById("popupDesc");
 const popupImg=document.getElementById("popupImg");
-const popupTrailer=document.getElementById("popupTrailer");
 const popupScreens=document.getElementById("popupScreens");
 const popupDownload=document.getElementById("popupDownload");
 
-// PROFILE & LOGOUT
+// PROFILE
 const googleUser=JSON.parse(localStorage.getItem("googleUser"));
 if(googleUser){
   document.getElementById("googleProfilePic").src=googleUser.picture;
-  document.getElementById("dropdownProfilePic").src=googleUser.picture;
+  document.getElementById("popupProfilePic").src=googleUser.picture;
   document.getElementById("accountName").innerText=googleUser.name;
   document.getElementById("accountEmail").innerText=googleUser.email;
 }
@@ -31,38 +30,42 @@ document.getElementById("logoutBtn").addEventListener("click",()=>{
   window.location.href="index.html";
 });
 
-// THEME TOGGLE
-const themeToggleBtn=document.getElementById("menuTheme");
-const themeLabel=document.getElementById("themeLabel");
-themeToggleBtn?.addEventListener("click",()=>{
-  document.body.classList.toggle("light-theme");
-  themeLabel.innerText=document.body.classList.contains("light-theme")?"Light":"Dark";
-});
+// SIDEBAR
+const sidebar=document.getElementById("sidebar");
+document.getElementById("menuBtn").addEventListener("click",()=>sidebar.classList.add("open"));
+document.querySelector(".sidebar").addEventListener("click",(e)=>{if(e.target===sidebar)sidebar.classList.remove("open");});
 
-// HAMBURGER MENU DIRECT LINKS
+// SIDEBAR LINKS
 document.getElementById("menuSettings").onclick=()=>window.location.href="settings.html";
 document.getElementById("menuPrivacy").onclick=()=>window.location.href="privacy.html";
 document.getElementById("menuHelp").onclick=()=>window.location.href="help.html";
 document.getElementById("menuRate").onclick=()=>window.location.href="rate.html";
 document.getElementById("menuAbout").onclick=()=>window.location.href="about.html";
 document.getElementById("menuShare").onclick=()=>{
-  if(navigator.share){
-    navigator.share({title:"Crunk Games",url:window.location.href}).catch(console.error);
-  } else {alert("Sharing not supported on this browser!");}
+  if(navigator.share){navigator.share({title:"Crunk Games",url:window.location.href});}
+  else{alert("Sharing not supported!");}
 };
+
+// THEME TOGGLE
+const themeToggleBtn=document.getElementById("menuTheme");
+const themeLabel=document.getElementById("themeLabel");
+themeToggleBtn.addEventListener("click",()=>{
+  document.body.classList.toggle("light-theme");
+  themeLabel.innerText=document.body.classList.contains("light-theme")?"Light":"Dark";
+});
 
 // FETCH GAMES
 let sliderGames=[],currentSlide=0;
 async function fetchGames(){
-  gamesContainer.innerHTML=`<p style="text-align:center;color:#34d399">Loading games...</p>`;
+  loader.style.display="block";
   try{
     const res=await fetch(`${BASE_URL}/games?key=${API_KEY}&platforms=4,187&page_size=24&ordering=-added`);
     const data=await res.json();
     const games=data.results||[];
-    if(games.length===0){ gamesContainer.innerHTML="<p style='text-align:center;color:#ff6b6b'>No games found</p>"; return; }
     renderGames(games);
     createSlider(games.slice(0,5));
-  }catch(err){ console.error(err); gamesContainer.innerHTML="<p style='text-align:center;color:#ff6b6b'>Failed to load games</p>"; }
+  }catch(err){console.error(err);gamesContainer.innerHTML="<p style='color:#ff6b6b'>Failed to load</p>";}
+  loader.style.display="none";
 }
 fetchGames();
 
@@ -77,7 +80,7 @@ searchInput.addEventListener("input",()=>{
       const res=await fetch(`${BASE_URL}/games?key=${API_KEY}&search=${query}`);
       const data=await res.json();
       renderGames(data.results||[]);
-    }catch(err){ console.error("Search error:",err); }
+    }catch(err){console.error(err);}
   },500);
 });
 
@@ -86,14 +89,14 @@ function renderGames(games){
   gamesContainer.innerHTML="";
   games.forEach(game=>{
     const stars="⭐".repeat(Math.round(game.rating||0));
-    const card=document.createElement("div"); card.className="game-card";
-    card.innerHTML=`
-      <img src="${game.background_image||"placeholder.png"}">
-      <div class="game-info">
-        <div class="game-title">${game.name}</div>
-        <div class="game-date">${game.released||""}</div>
-        <div class="game-rating">${stars}</div>
-      </div>`;
+    const card=document.createElement("div");
+    card.className="game-card";
+    card.innerHTML=`<img src="${game.background_image||"placeholder.png"}">
+    <div class="game-info">
+      <div class="game-title">${game.name}</div>
+      <div class="game-date">${game.released||""}</div>
+      <div class="game-rating">${stars}</div>
+    </div>`;
     card.onclick=()=>openGame(game.id);
     gamesContainer.appendChild(card);
   });
@@ -110,9 +113,9 @@ function createSlider(games){
     dotsContainer.appendChild(dot);
   });
   goSlide(0);
-  if(sliderGames.length>0){ setInterval(()=>{ currentSlide=(currentSlide+1)%sliderGames.length; goSlide(currentSlide); },5000); }
+  if(sliderGames.length>0){ setInterval(()=>{currentSlide=(currentSlide+1)%sliderGames.length;goSlide(currentSlide);},5000);}
 }
-function goSlide(index){ currentSlide=index; slidesContainer.style.transform=`translateX(-${index*100}%)`; dotsContainer.querySelectorAll(".dot").forEach((dot,i)=>dot.classList.toggle("active",i===index)); }
+function goSlide(index){currentSlide=index;slidesContainer.style.transform=`translateX(-${index*100}%)`;dotsContainer.querySelectorAll(".dot").forEach((dot,i)=>dot.classList.toggle("active",i===index));}
 
 // GAME POPUP
 async function openGame(id){
@@ -126,21 +129,12 @@ async function openGame(id){
     const shotRes=await fetch(`${BASE_URL}/games/${id}/screenshots?key=${API_KEY}`);
     const shots=await shotRes.json();
     popupScreens.innerHTML="";
-    (shots.results||[]).slice(0,6).forEach(s=>{
-      const img=document.createElement("img"); img.src=s.image; img.className="screen";
-      popupScreens.appendChild(img);
-    });
+    (shots.results||[]).slice(0,6).forEach(s=>{ const img=document.createElement("img"); img.src=s.image; popupScreens.appendChild(img); });
 
-    const trailerRes=await fetch(`${BASE_URL}/games/${id}/movies?key=${API_KEY}`);
-    const trailerData=await trailerRes.json();
-    const trailer=trailerData.results?.[0]?.data?.max||"";
-    popupTrailer.innerHTML=trailer?`<video controls width="100%" style="border-radius:12px;background:#000"><source src="${trailer}" type="video/mp4"></video>`:"<div style='color:#ffb400'>No trailer available</div>";
     popupDownload.onclick=()=>window.open(game.website||"#","_blank");
     gamePopup.style.display="flex";
-  }catch(err){ console.error("Error opening game:",err); }
+  }catch(err){console.error(err);}
 }
-
-// CLOSE POPUP
-gamePopup.addEventListener("click",(e)=>{ if(e.target===gamePopup||e.target.classList.contains("close")) closeGame(); });
+gamePopup.addEventListener("click",(e)=>{if(e.target===gamePopup||e.target.classList.contains("close")) closeGame();});
 popupContent.addEventListener("click",(e)=>e.stopPropagation());
-function closeGame(){ gamePopup.style.display="none"; }
+function closeGame(){gamePopup.style.display="none";}
