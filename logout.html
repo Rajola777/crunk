@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="logout.css">
-    <title>Crunk Games Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="logout.css">
+
+<title>Crunk Games Login</title>
 </head>
+
 <body>
-   <div class="container">
-       <h1>Welcome to Crunk Games</h1>
-       <form id="loginForm">
-           <div class="form-control">
-               <input type="text" id="username" required>
-               <label>Username</label>
-           </div>
-           <div class="form-control">
-               <input type="email" id="email" required>
-               <label>Email</label>
-           </div>
-           <div class="form-control">
-               <input type="tel" id="phone" required>
-               <label>Phone Number</label>
-           </div>
 
-           <!-- OTP input, hidden initially -->
-           <div class="form-control" id="otpDiv" style="display:none;">
-               <input type="number" id="otp" placeholder="Enter OTP" required>
-               <label>OTP</label>
-           </div>
+<div class="container">
 
-           <button type="submit" class="btn" id="actionBtn">Send OTP</button>
-           <p class="text" id="message"></p>
-       </form>
+<h1>Welcome to Crunk Games</h1>
 
-       <!-- reCAPTCHA container -->
-       <div id="recaptcha-container"></div>
-   </div>
+<form id="loginForm">
+
+<div class="form-control">
+<input type="text" id="username" required>
+<label>Username</label>
+</div>
+
+<div class="form-control">
+<input type="email" id="email" required>
+<label>Email</label>
+</div>
+
+<div class="form-control">
+<input type="tel" id="phone" required>
+<label>Phone Number</label>
+</div>
+
+<button type="submit" class="btn">Login</button>
+
+<p class="text" id="message"></p>
+
+</form>
+
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
 <script src="logout.js"></script>
+
 </body>
 </html>
