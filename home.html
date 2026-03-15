@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crunk Games</title>
-
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="home.css">
 </head>
@@ -14,15 +13,16 @@
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="brand"><h1>Crunk games</h1></div>
+    <div class="menu" id="menuBtn"><i class="bx bx-menu"></i></div>
+    <div class="brand"><h1>Crunk Games</h1></div>
 
     <div class="topbar-right">
-      <!-- Google Profile -->
+      <i class="bx bx-bell" id="notificationBtn"></i>
       <div class="profile-dropdown">
         <img id="googleProfilePic" src="placeholder.png" alt="Profile">
-        <div class="dropdown-menu">
+        <div class="profile-popup">
           <div class="account-info">
-            <img id="dropdownProfilePic" src="placeholder.png">
+            <img id="popupProfilePic" src="placeholder.png">
             <div>
               <p id="accountName">User Name</p>
               <p id="accountEmail">user@example.com</p>
@@ -31,14 +31,11 @@
           <button id="logoutBtn">Logout</button>
         </div>
       </div>
-
-      <!-- Notification -->
-      <i class="bx bx-bell" id="notificationBtn"></i>
     </div>
   </header>
 
-  <!-- HAMBURGER MENU STATIC LINKS -->
-  <div class="sidebar">
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
     <ul class="sidebar-menu">
       <li id="menuSettings">Settings</li>
       <li id="menuPrivacy">Privacy & Policy</li>
@@ -46,6 +43,7 @@
       <li id="menuHelp">Help / Support</li>
       <li id="menuRate">Rate App</li>
       <li id="menuAbout">About</li>
+      <li id="menuTheme">Theme: <span id="themeLabel">Dark</span></li>
     </ul>
   </div>
 
@@ -64,6 +62,9 @@
     <button class="claim">Claim</button>
   </div>
 
+  <!-- LOADER -->
+  <div id="loader" class="loader"></div>
+
   <!-- SLIDER -->
   <div class="slider">
     <div class="slides"></div>
@@ -79,10 +80,7 @@
       <span class="close">✖</span>
       <img id="popupImg">
       <h2 id="popupTitle"></h2>
-      <div id="popupRating"></div>
-      <div id="popupDate"></div>
-      <p id="popupDesc"></p>
-      <div id="popupTrailer"></div>
+      <div id="popupDesc"></div>
       <div id="popupScreens"></div>
       <a id="popupDownload"><button>Download</button></a>
     </div>
