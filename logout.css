@@ -1,11 +1,12 @@
-/* Created by rajola*/
+/* Created by Rajola - Crunk Games login page */
 
 *{
     box-sizing: border-box;
-}
-body{
-    padding: 0;
     margin: 0;
+    padding: 0;
+}
+
+body{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -14,86 +15,139 @@ body{
     align-items: center;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
-    background-color: steelblue;
+    background-color: #224566; /* Home page theme */
     color: #fff;
 }
+
 .container{
-    background-color:#224566 ;
+    background-color: #1a3550; /* Slightly darker for contrast */
     color: #fff;
-    padding: 20px 40px;
+    padding: 30px 40px;
     border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    width: 350px;
+    max-width: 90%;
 }
+
 h1{
     text-align: center;
     font-weight: 400;
     margin-bottom: 30px;
+    color: #A0CEE1;
 }
+
 form{
     margin: 0 auto;
     width: 100%;
 }
+
 .form-control{
     position: relative;
-    margin: 20px 0 40px;
-    width: 300px;
+    margin: 20px 0 30px;
+    width: 100%;
 }
+
 .form-control input{
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #fff; 
+    border-bottom: 2px solid #A0CEE1; 
     color: #fff;
     width: 100%;
     padding: 15px 0;
+    font-size: 16px;
 }
-.form-control input{
-    outline:none ;
-}
+
 .form-control input:focus,
-.form-control input:valid {
-    outline-style: 0;
-    border-bottom-color: lightblue ;
+.form-control input:valid{
+    outline: none;
+    border-bottom-color: #4FC3F7;
 }
+
 .form-control label{
     position: absolute;
     left: 0;
-    top:15px
+    top: 15px;
+    pointer-events: none;
 }
+
 .form-control label span{
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     min-width: 5px;
     transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
 .form-control input:focus + label span,
 .form-control input:valid + label span{
-    color: lightblue;
+    color: #4FC3F7;
     transform: translateY(-30px);
 }
+
 .btn{
     width: 100%;
     background-color: #A0CEE1;
     border: none;
     border-radius: 12px;
-    padding: 10px;
+    padding: 12px;
     color: #224566;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     display: inline-block;
     font-family: inherit;
+    transition: all 0.2s ease;
 }
+
 .btn:focus{
     outline: 0;
 }
-.btn:active, .btn:hover{
-    transform: scale(.98);
+
+.btn:hover, .btn:active{
+    transform: scale(0.98);
 }
+
 .text{
-    margin-top: 30px;
+    margin-top: 20px;
     font-weight: 200;
     font-size: 14px;
+    text-align: center;
 }
+
 .text a{
     text-decoration: none;
-    color: #658CA9;
+    color: #4FC3F7;
+}
+
+#message{
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #FFCC00; /* Highlight messages */
+}
+
+/* OTP Input Adjustments */
+#otpDiv{
+    margin-top: 10px;
+}
+
+#otp{
+    letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 400px){
+    .container{
+        width: 90%;
+        padding: 25px 20px;
+    }
+
+    .form-control input{
+        font-size: 14px;
+        padding: 12px 0;
+    }
+
+    .btn{
+        font-size: 14px;
+        padding: 10px;
+    }
 }
