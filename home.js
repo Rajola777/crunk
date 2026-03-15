@@ -138,3 +138,53 @@ async function openGame(id){
 gamePopup.addEventListener("click",(e)=>{if(e.target===gamePopup||e.target.classList.contains("close")) closeGame();});
 popupContent.addEventListener("click",(e)=>e.stopPropagation());
 function closeGame(){gamePopup.style.display="none";}
+const slidesContainer = document.querySelector(".slides");
+const dotsContainer = document.querySelector(".dots");
+const closeSlider = document.getElementById("closeSlider");
+
+let sliderGames = [];
+let currentSlide = 0;
+let sliderInterval;
+
+function createSlider(games){
+  sliderGames = games;
+
+  slidesContainer.innerHTML = "";
+  dotsContainer.innerHTML = "";
+
+  games.forEach((game, i)=>{
+    const img = document.createElement("img");
+    img.src = game.background_image;
+    img.className = "slide";
+    img.onclick = ()=> openGame(game.id);
+    slidesContainer.appendChild(img);
+
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.onclick = ()=> goSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  goSlide(0);
+
+  if(sliderGames.length > 0){
+    sliderInterval = setInterval(()=>{
+      currentSlide = (currentSlide +1) % sliderGames.length;
+      goSlide(currentSlide);
+    },5000);
+  }
+}
+
+function goSlide(index){
+  currentSlide = index;
+  slidesContainer.style.transform = `translateX(-${index *100}%)`;
+  dotsContainer.querySelectorAll(".dot").forEach((dot,i)=>{
+    dot.classList.toggle("active", i===index);
+  });
+}
+
+// Close slider manually
+closeSlider.addEventListener("click", ()=>{
+  document.querySelector(".slider").style.display = "none";
+  clearInterval(sliderInterval);
+});
