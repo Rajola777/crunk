@@ -15,7 +15,6 @@ body{
     align-items: center;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
-    /* Gradient background like home page */
     background: linear-gradient(135deg, #1B2A49, #224566);
     color: #fff;
 }
@@ -79,7 +78,7 @@ form{
     display: inline-block;
     font-size: 16px;
     min-width: 5px;
-    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
 
 .form-control input:focus + label span,
@@ -88,7 +87,8 @@ form{
     transform: translateY(-30px);
 }
 
-/* Buttons with glow hover effect */
+/* Button */
+
 .btn{
     width: 100%;
     background: linear-gradient(135deg, #4FC3F7, #1A9FF0);
@@ -109,7 +109,7 @@ form{
     outline: 0;
 }
 
-.btn:hover, .btn:active{
+.btn:hover{
     transform: scale(0.98);
     box-shadow: 0 6px 18px rgba(79,195,247,0.7);
 }
@@ -126,24 +126,16 @@ form{
     color: #4FC3F7;
 }
 
-/* OTP and message styling */
-#otpDiv{
-    margin-top: 10px;
-}
-
-#otp{
-    letter-spacing: 3px;
-}
-
 #message{
     margin-top: 15px;
     text-align: center;
     font-size: 14px;
-    color: #FFCC00; /* highlight messages */
+    color: #FFCC00;
     text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 /* Responsive */
+
 @media (max-width: 400px){
     .container{
         width: 90%;
