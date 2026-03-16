@@ -1,3 +1,4 @@
+let sliderInterval;
 const googleUser = JSON.parse(localStorage.getItem("googleUser"));
 
 if(!googleUser){
@@ -112,10 +113,8 @@ async function fetchGames() {
       "<p style='text-align:center;color:#ff6b6b'>Failed to load games</p>";
   }
 }
-
-fetchGames();
 loader.style.display = "flex";
-
+fetchGames();
 // ===============================
 // SEARCH
 // ===============================
@@ -123,11 +122,14 @@ let searchTimeout;
 
 searchInput.addEventListener("input", () => {
 
-  clearTimeout(searchTimeout);
-loader.style.display = "none";
-  searchTimeout = setTimeout(async () => {
+clearTimeout(searchTimeout);
 
-    const query = searchInput.value.trim();
+loader.style.display = "flex";
+
+searchTimeout = setTimeout(async () => {
+
+const query = searchInput.value.trim();
+
 
     if (query.length < 2) {
       fetchGames();
@@ -207,23 +209,18 @@ function createSlider(games) {
     dotsContainer.appendChild(dot);
 
   });
-
-  goSlide(0);
-
-  if (sliderGames.length > 0) {
-
-    setInterval(() => {
-
-      currentSlide = (currentSlide + 1) % sliderGames.length;
-
-      goSlide(currentSlide);
-
-    }, 5000);
-
-  }
-
+if(sliderInterval){
+clearInterval(sliderInterval);
 }
 
+sliderInterval = setInterval(() => {
+
+currentSlide = (currentSlide + 1) % sliderGames.length;
+
+goSlide(currentSlide);
+
+}, 5000);
+  goSlide(0);
 function goSlide(index) {
 
   currentSlide = index;
