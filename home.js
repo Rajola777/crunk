@@ -1,3 +1,8 @@
+const googleUser = JSON.parse(localStorage.getItem("googleUser"));
+
+if(!googleUser){
+window.location.href = "index.html";
+}
 // ===============================
 // CONFIG
 // ===============================
