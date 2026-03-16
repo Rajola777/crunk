@@ -16,6 +16,7 @@ const gamesContainer = document.getElementById("gamesContainer");
 const searchInput = document.getElementById("searchInput");
 const slidesContainer = document.querySelector(".slides");
 const dotsContainer = document.querySelector(".dots");
+const loader = document.getElementById("loader");
 
 // Popup
 const gamePopup = document.getElementById("gamePopup");
@@ -49,7 +50,13 @@ document.getElementById("menuShare").onclick = () => {
 document.getElementById("menuHelp").onclick = () => location.href = "help.html";
 document.getElementById("menuRate").onclick = () => location.href = "rate.html";
 document.getElementById("menuAbout").onclick = () => location.href = "about.html";
-document.getElementById("menuLogout").onclick = () => location.href = "index.html";
+document.getElementById("menuLogout").onclick = () => {
+
+localStorage.removeItem("googleUser");
+
+location.href = "index.html";
+
+};
 
 // ===============================
 // NAVIGATION
@@ -83,7 +90,6 @@ let currentSlide = 0;
 
 async function fetchGames() {
   try {
-
     const res = await fetch(
       `${BASE_URL}/games?key=${API_KEY}&platforms=4,187&page_size=24&ordering=-added`
     );
@@ -108,6 +114,7 @@ async function fetchGames() {
 }
 
 fetchGames();
+loader.style.display = "flex";
 
 // ===============================
 // SEARCH
@@ -117,7 +124,7 @@ let searchTimeout;
 searchInput.addEventListener("input", () => {
 
   clearTimeout(searchTimeout);
-
+loader.style.display = "none";
   searchTimeout = setTimeout(async () => {
 
     const query = searchInput.value.trim();
@@ -326,9 +333,11 @@ navigator.serviceWorker.register("/sw.js")
 
 }
 const profilePic = document.getElementById("profilePic");
-
-const googleUser = JSON.parse(localStorage.getItem("googleUser"));
-
 if(googleUser){
 profilePic.src = googleUser.picture;
 }
+
+
+window.addEventListener("load", () => {
+loader.style.display = "none";
+});
